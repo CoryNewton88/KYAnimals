@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Farm Animals for Sale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #77b300;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .animal-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .animal-section h2 {
+            color: #333;
+        }
+
+        .animal-section img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .contact-form input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #77b300;
+            color: white;
+            border: 0;
+            cursor: pointer;
+        }
+
+        .contact-form input[type="submit"]:hover {
+            background-color: #669900;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Welcome to Our Farm Animals Sale</h1>
+    </div>
+
+    <div class="container">
+
+        <!-- Cows Section -->
+        <div class="animal-section">
+            <h2><button (click)="navigateToProducts('cow')">Cows</button></h2>
+            <img [style.width.px]="150" [style.height.px]="100" src="/assets/images/cow.png" alt="Cows">
+            <p>Check out our variety of healthy and well-fed cows suitable for dairy and beef production.</p>
+        </div>
+
+        <!-- Sheep Section -->
+        <div class="animal-section" (click)="navigateToProducts('sheep')">
+            <h2><button (click)="navigateToProducts('sheep')">Sheep</button></h2>
+            <img [style.width.px]="150" [style.height.px]="100" src="/assets/images/sheep.svg" alt="Sheep">
+            <p>Explore our collection of sheep, perfect for wool production and meat.</p>
+        </div>
+
+        <!-- Goats Section -->
+        <div class="animal-section" (click)="navigateToProducts('goat')">
+            <h2><button (click)="navigateToProducts('goat')">Goats</button></h2>
+            <img [style.width.px]="150" [style.height.px]="100" src="/assets/images/goat.png" alt="Goats">
+            <p>Browse our goats, ideal for dairy products, meat, and as friendly farm pets.</p>
+        </div>
+
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form action="/submit-contact"></form>
+        </div>
+    </div>
+</body>

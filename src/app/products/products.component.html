@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Products</title>
+    <style>
+        .animal-box {
+            display: flex;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .animal-image {
+            flex: 0 0 150px;
+            /* Adjust the size as needed */
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .animal-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .animal-details {
+            flex: 1;
+            padding-left: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .animal-details h2 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .animal-details p {
+            color: #666;
+        }
+
+        .animal-actions {
+            text-align: right;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Animal Products</h1>
+        <div class="animal-filters">
+            <button (click)="filterByAnimalType('all')">All</button>
+            <button (click)="filterByAnimalType('cow')">Cows</button>
+            <button (click)="filterByAnimalType('sheep')">Sheep</button>
+            <button (click)="filterByAnimalType('goat')">Goats</button>
+        </div>
+        <div *ngFor="let animal of paginatedAnimals" class="animal-box">
+            <div class="animal-image">
+                <img [style.width.px]="150" [style.height.px]="100" [src]="animal.imageUrl" alt="{{ animal.type }}">
+            </div>
+            <div class="animal-details">
+                <div>
+                    <h2>{{ animal.type | titlecase }}</h2>
+                    <p>{{ animal.description }}</p>
+                </div>
+                <div class="animal-actions">
+                    <p>Price: ${{ animal.price }}</p>
+                    <button (click)="buyAnimal(animal)">Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalItems / itemsPerPage | ceil }}</span>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+</body>
+
+</html>
