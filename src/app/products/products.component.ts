@@ -103,7 +103,7 @@ export class ProductsComponent implements OnInit {
 
 
   buyAnimal(animal: Animal): void {
-    console.log('Buying', animal);
+    //console.log('Buying', animal);
   
     // Create a CartItem with the selected animal's type, price, image, description, and quantity
     const cartItem: CartItem = {
@@ -111,12 +111,13 @@ export class ProductsComponent implements OnInit {
       price: animal.price,
       imageUrl: animal.imageUrl,
       description: animal.description,
-      quantity: 1, // You can set the quantity to 1 for now
+      quantity: 1,
+      total: animal.price,
     };
   
     // Use the CartService to add the item to the cart
     this.cartService.addItemToCart(cartItem);
-    console.log(cartItem);
+    //console.log(cartItem);
   }
   
 

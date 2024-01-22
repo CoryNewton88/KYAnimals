@@ -7,16 +7,32 @@ import { CartItem } from './cart.component';
   providedIn: 'root'
 })
 export class CartService {
-  private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
-  cartItems$: Observable<CartItem[]> = this.cartItemsSubject.asObservable();
+  private cartItemsSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
+  cartItems$ = this.cartItemsSubject.asObservable();
 
-  constructor() {}
+  constructor() {
+    // Initialize cartItems from sessionStorage when the service is created
+    const storedItems = sessionStorage.getItem('cartItems');
+    if (storedItems) {
+      this.cartItemsSubject.next(JSON.parse(storedItems));
+    }
+  }
 
-  // Add an item to the cart
   addItemToCart(item: CartItem): void {
     const currentItems = this.cartItemsSubject.value;
     const updatedItems = [...currentItems, item];
     this.cartItemsSubject.next(updatedItems);
-    console.log(item.type + ' ' + 'test');
+
+    // Update sessionStorage with the updated items
+    sessionStorage.setItem('cartItems', JSON.stringify(updatedItems));
+  }
+
+  removeItemFromCart(item: CartItem): void {
+    const currentItems = this.cartItemsSubject.value;
+    const updatedItems = currentItems.filter((cartItem) => cartItem !== item);
+    this.cartItemsSubject.next(updatedItems);
+
+    // Update sessionStorage with the updated items
+    sessionStorage.setItem('cartItems', JSON.stringify(updatedItems));
   }
 }
